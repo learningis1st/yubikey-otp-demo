@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        input { padding: 0.5rem; font-size: 1rem; }
+        #error-msg { color: red; display: none; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <form action="/auth" method="POST">
+        <input type="password" name="otp" placeholder="Touch Yubikey..." autofocus required autocomplete="off">
+    </form>
+    
+    <div id="error-msg"></div>
+
+    <script>
+        const error = new URLSearchParams(window.location.search).get('error');
+        if (error) {
+            const errorDiv = document.getElementById('error-msg');
+            errorDiv.textContent = error;
+            errorDiv.style.display = 'block';
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+</body>
+</html>
